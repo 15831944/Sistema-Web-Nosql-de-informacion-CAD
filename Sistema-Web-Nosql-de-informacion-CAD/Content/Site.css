@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 20px;
 }
 
@@ -9,16 +9,111 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.title-bluelight {
+    color: #5bc0de;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
 textarea {
-    max-width: 280px;
+    resize: none;
+}
+
+.input-group-addon {
+    min-width: 220px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.SaveButton {
+    margin-right: 15px;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.RowTopMargin {
+    margin-top: 15px;
+}
+
+.RowBottomMargin {
+    margin-bottom: 75px;
+}
+
+.RowLeftMargin {
+    margin-left: 15px;
+}
+
+.NoPaddingLeft {
+    padding-left: 0px;
+}
+
+.AccessDeniedDiv {
+    padding-top: 20px;
+    position: relative;
+    text-align: center;
+}
+
+.AccessDeniedImage {
+    display: block;
+    margin: auto;
+    z-index: -1;
+}
+
+.AccessDeniedText {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 180px;
+}
+
+.selNoBorder {
+    border-width: 0px;
+    width: 100%;
+}
+
+.leftAlign{
+    text-align:left;
+    padding-left:25px;
+}
+
+.rightAlign {
+    text-align: right;
+    padding-right: 25px;
+}
+
+.validationColor {
+    color:red;
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate {
+  width: 85px;
+  white-space: nowrap;
+  overflow:  hidden;
+  text-overflow: ellipsis;
 }

@@ -1,42 +1,47 @@
-﻿<!DOCTYPE html>
+﻿@model  ViewModelBase
+<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+    <script type='text/javascript'>
+        function openEmail(email, emailCC, emailSub, emailBody) {
+            location.href = "mailto:" + email + '?cc=' + emailCC + '&subject=' + emailSub + '&body=' + emailBody;
+            return false;
+        }
+    </script> 
+    <div class="container body-content">
+        <div class="panel panel-default">
+            <div class="panel-body media">
+                <div class="pull-left">
+                    <img class="media-object" src="@Url.Content("~/Content/TrLogo.png")" data-holder-rendered="true">
+                </div>
+                <div class="media-body text-center">
+                    <h2 class="title-bluelight">Gestión Alta de Proyectos</h2>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 text-center">
+                    <p>
+                        &copy; @String.Concat(DateTime.Now.Year, " - Alberto Herrero Prieto para Unir. La información contenida en esta web es confidencial.")
+                        Contacta con <a href="mailto:@String.Format("{0}?Subject={1}", Model.ProcessContactEmail, Model.ProccessContactMailSubject)"> el administrador </a> clickando en el link para cualquier incidencia o solicitud.
+                    </p>
+                </div>
+            </div>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", false)
 </body>
 </html>

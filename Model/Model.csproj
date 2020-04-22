@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,34 +52,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Preference.cs">
+      <DependentUpon>CAD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Action.cs">
+    <Compile Include="Action.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\Audit.cs">
+    <Compile Include="Audit.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\CAD.Context.cs">
+    <Compile Include="CAD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CAD.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\CAD.cs">
+    <Compile Include="CAD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\CAD.Designer.cs">
+    <Compile Include="CAD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CAD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Repository\Script.cs">
+    <Compile Include="Script.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Repository\CAD.edmx">
+    <EntityDeploy Include="CAD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CAD.Designer.cs</LastGenOutput>
     </EntityDeploy>
@@ -86,17 +92,17 @@
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <None Include="Repository\CAD.edmx.diagram">
+    <None Include="CAD.edmx.diagram">
       <DependentUpon>CAD.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Repository\CAD.Context.tt">
+    <Content Include="CAD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CAD.Context.cs</LastGenOutput>
       <DependentUpon>CAD.edmx</DependentUpon>
     </Content>
-    <Content Include="Repository\CAD.tt">
+    <Content Include="CAD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CAD.edmx</DependentUpon>
       <LastGenOutput>CAD.cs</LastGenOutput>

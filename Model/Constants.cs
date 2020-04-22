@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Model
 {
-    class Constants
+    public class Constants
     {
+        public const string ContactEmail = "ContactEmail";
+        public const string ContactName = "ContactName";
+        public const string ContactSubject = "ContactSubject";
     }
 }
