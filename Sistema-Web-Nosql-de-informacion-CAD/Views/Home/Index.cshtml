@@ -1,4 +1,14 @@
-﻿@{
-    ViewBag.Title = "Home";
-}
+﻿@model  HomeViewModel
 
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div class="page-header RowTopMargin">
+        <h3 class="title-bluelight">Lista de Planos</h3>
+    </div>
+    @*@Html.Partial("~/Views/Home/_ProjectsGridPartial.cshtml", Model, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = Constants.ProjectsGridName } });*@
+
+    <div class="page-header RowTopMargin">
+        <h3 class="title-bluelight">Lista de Scripts</h3>
+    </div>
+    @*@Html.Partial("~/Views/Home/_ProjectsGridPartial.cshtml", Model, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = Constants.ProjectsGridName } });*@
+}
