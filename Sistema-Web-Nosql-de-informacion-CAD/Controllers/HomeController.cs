@@ -10,22 +10,26 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
 {
     public class HomeController : Controller
     {
-        private CadEntities _CadEntities;
         private LoggingService _LoggingService;
         private PreferenceRepository _PreferenceRepository;
+        private PlaneRepository _PlaneRepository;
+        private ScriptRepository _ScriptRepository;
 
-        public HomeController()
+        public HomeController(LoggingService myLoggingService, PreferenceRepository myPreferenceRepository, PlaneRepository myPlaneRepository,
+                              ScriptRepository myScriptRepository)
         {
-            _CadEntities = new CadEntities();
-            _LoggingService = new LoggingService(_CadEntities);
-            _PreferenceRepository = new PreferenceRepository(_CadEntities, _LoggingService);
+            _LoggingService = myLoggingService;
+            _PreferenceRepository = myPreferenceRepository;
+            _PlaneRepository = myPlaneRepository;
+            _ScriptRepository = myScriptRepository;
         }
 
         public ActionResult Index()
         {
-            HomeViewModel vmBase = new HomeViewModel();
-            _PreferenceRepository.LoadBasePreferences(vmBase);
-            return View(vmBase);
+            HomeViewModel vmHome = new HomeViewModel();
+            _PreferenceRepository.LoadBasePreferences(vmHome);
+            vmHome.ScriptListViewModel.List = _ScriptRepository.GetAll();
+            return View(vmHome);
         }
     }
 }

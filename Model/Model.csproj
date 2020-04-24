@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Plane.cs" />
     <Compile Include="Preference.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
@@ -80,6 +81,8 @@
     <Compile Include="Script.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ScriptListViewModel.cs" />
+    <Compile Include="ViewModel\PlaneListViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>

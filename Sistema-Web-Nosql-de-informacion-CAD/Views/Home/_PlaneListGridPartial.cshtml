@@ -1,0 +1,22 @@
+﻿@model  PlaneListViewModel
+@{
+    WebGrid myGrid = new WebGrid(Model.List);
+}
+
+<div class="page-header RowTopMargin">
+    <h3 class="title-bluelight">Lista de Planos</h3>
+</div>
+@if (Model.List.Count > 0)
+{
+    <div Class="row row-eq-height RowTopMargin">
+        <div Class="col-md-12">
+            @myGrid.GetHtml(
+                 tableStyle: "webGridTable",
+                 mode: WebGridPagerModes.All,
+                 columns: new[] {
+                myGrid.Column("Name"),
+                myGrid.Column("Description")
+             })
+        </div>
+    </div>
+}

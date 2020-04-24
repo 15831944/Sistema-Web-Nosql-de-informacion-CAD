@@ -3,7 +3,6 @@
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -21,7 +20,6 @@ textarea {
     min-width: 220px;
 }
 
-/* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
 }
@@ -90,9 +88,9 @@ input[type="checkbox"].input-validation-error {
     width: 100%;
 }
 
-.leftAlign{
-    text-align:left;
-    padding-left:25px;
+.leftAlign {
+    text-align: left;
+    padding-left: 25px;
 }
 
 .rightAlign {
@@ -101,19 +99,49 @@ input[type="checkbox"].input-validation-error {
 }
 
 .validationColor {
-    color:red;
+    color: red;
 }
 
 .truncate {
-  width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .truncate {
-  width: 85px;
-  white-space: nowrap;
-  overflow:  hidden;
-  text-overflow: ellipsis;
+    width: 85px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.webGridTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.webGridTable td, th {
+    border: 1px  #5bc0de;
+}
+
+.webGridTable td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+/*.webGridTable tr:nth-child(even) {
+    background-color: #dddddd;
+}*/
+
+.hovercs {
+    cursor: pointer;
+    background-color: aquamarine;
+}
+
+.clickable {
+    cursor: pointer;
+    background: #ffff99;
 }

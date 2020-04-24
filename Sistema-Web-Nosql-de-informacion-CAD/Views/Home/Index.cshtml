@@ -2,13 +2,7 @@
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {
-    <div class="page-header RowTopMargin">
-        <h3 class="title-bluelight">Lista de Planos</h3>
-    </div>
-    @*@Html.Partial("~/Views/Home/_ProjectsGridPartial.cshtml", Model, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = Constants.ProjectsGridName } });*@
 
-    <div class="page-header RowTopMargin">
-        <h3 class="title-bluelight">Lista de Scripts</h3>
-    </div>
-    @*@Html.Partial("~/Views/Home/_ProjectsGridPartial.cshtml", Model, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = Constants.ProjectsGridName } });*@
+    @Html.Partial("~/Views/Home/_PlaneListGridPartial.cshtml", Model.PlaneListViewModel, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = Constants.PlanesGridName } });
+    @Html.Partial("~/Views/Home/_ScriptListGridPartial.cshtml", Model.ScriptListViewModel, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = Constants.ScriptsGridName } });
 }
