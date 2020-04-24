@@ -29,6 +29,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
             HomeViewModel vmHome = new HomeViewModel();
             _PreferenceRepository.LoadBasePreferences(vmHome);
             vmHome.ScriptListViewModel.List = _ScriptRepository.GetAll();
+            vmHome.PlaneListViewModel.List = _PlaneRepository.GetAll();
             return View(vmHome);
         }
     }
