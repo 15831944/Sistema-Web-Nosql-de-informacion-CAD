@@ -30,9 +30,9 @@ public class PlaneRepository : BaseRepository
         collection = database.GetCollection<BsonDocument>("CADPlane");
     }
 
-    public List<Plane> GetAll()
+    public List<ActionWrapper> GetAll()
     {
-        List<Plane> myPlaneList = new List<Plane>();
+        List<ActionWrapper> myPlaneList = new List<ActionWrapper>();
         List<BsonDocument> myList = collection.Find(new BsonDocument()).ToList();
         foreach (var item in myList)
         {
@@ -42,9 +42,9 @@ public class PlaneRepository : BaseRepository
         return myPlaneList;
     }
 
-    public Plane Adapt(BsonDocument myBsonDocument)
+    public ActionWrapper Adapt(BsonDocument myBsonDocument)
     {
-        return new Plane();
+        return new ActionWrapper();
     }
 
     #endregion

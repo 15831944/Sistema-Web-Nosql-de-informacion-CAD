@@ -6,10 +6,10 @@ using System.Web.SessionState;
 
 public class PlaneListViewModel : ViewModelBase
 {
-    public List<Plane> List { get; set; }
+    public List<ActionWrapper> List { get; set; }
 
     public PlaneListViewModel()
     {
-        List = new List<Plane>();
+        List = new List<ActionWrapper>();
     }
 }
