@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    using System;
-    using System.Collections.Generic;
-
-    public partial class Plane
+    public class Plane
     {
         public Plane()
         {

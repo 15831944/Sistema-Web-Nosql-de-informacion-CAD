@@ -17,19 +17,57 @@ using _AcDb = Teigha.DatabaseServices;
 using _AcGe = Teigha.Geometry;
 using _AcEd = Bricscad.EditorInput;
 using Services;
+using Model;
 
 namespace CsBrxMgd
 {
     public class BricsCadEntityInjector
     {
         LoggingService _LoggingService;
+        ActionWrapper currentActionWrapper;
 
         public BricsCadEntityInjector(LoggingService myLoggingService)
         {
             _LoggingService = myLoggingService;
         }
 
-        public void do_addLine()
+        public ActionWrapper Dispatcher(ActionWrapper myActionWrapper)
+        {
+            currentActionWrapper = myActionWrapper;
+
+            switch (myActionWrapper.Type)
+            {
+                case ActionWrapper.TypeEnum.AddCircle:
+                    addCircle();
+                    break;
+                case ActionWrapper.TypeEnum.AddLayer:
+                    addLayer();
+                    break;
+                case ActionWrapper.TypeEnum.AddLine:
+                    addLine();
+                    break;
+                case ActionWrapper.TypeEnum.AddPolyLine:
+                    addPolyLine();
+                    break;
+                case ActionWrapper.TypeEnum.CreateTable:
+                    createTable();
+                    break;
+                case ActionWrapper.TypeEnum.PerfomranceTest:
+                    performanceTest();
+                    break;
+                case ActionWrapper.TypeEnum.ReadDwgFile:
+                    readDwgFile(myActionWrapper.Parameter);
+                    break;
+                default:
+                    myActionWrapper.Status = ActionWrapper.StatusEnum.DataError;
+                    break;
+
+            }
+
+            return currentActionWrapper;
+        }
+
+        private void addLine()
         {
             Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
@@ -45,9 +83,9 @@ namespace CsBrxMgd
             }
         }
 
-        public void do_addPolyLine()
+        private void addPolyLine()
         {
-            _ = Application.DocumentManager.MdiActiveDocument.Editor;
+            Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
             {
                 Polyline pline1 = new Polyline(4);
@@ -71,7 +109,7 @@ namespace CsBrxMgd
             }
         }
 
-        public void do_addLayer()
+        private void addLayer()
         {
             Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
@@ -104,7 +142,7 @@ namespace CsBrxMgd
             }
         }
 
-        public void do_addCircle()
+        private void addCircle()
         {
             Editor editor = _AcAp.Application.DocumentManager.MdiActiveDocument.Editor;
             try
@@ -122,7 +160,7 @@ namespace CsBrxMgd
             }
         }
 
-        public void do_performanceTest()
+        private void performanceTest()
         {
             Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
@@ -164,7 +202,7 @@ namespace CsBrxMgd
             }
         }
 
-        public void do_readDwgFile(string path)
+        private void readDwgFile(string path)
         {
             Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
@@ -181,7 +219,7 @@ namespace CsBrxMgd
             }
         }
 
-        public void do_createTable()
+        private void createTable()
         {
             Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
@@ -215,7 +253,7 @@ namespace CsBrxMgd
             }
         }
 
-        public ObjectIdCollection AddToModelSpace(params Entity[] list)
+        private ObjectIdCollection AddToModelSpace(params Entity[] list)
         {
             ObjectIdCollection ids = new ObjectIdCollection();
             Database database = HostApplicationServices.WorkingDatabase;

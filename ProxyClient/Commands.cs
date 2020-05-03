@@ -39,10 +39,16 @@ namespace CsBrxMgd
 
         public Commands()
         {
-            _CadEntities = new CadEntities();
-            _LoggingService = new LoggingService(_CadEntities);
-            _BricsCadEntityInjector = new BricsCadEntityInjector(_LoggingService);
-            _WcfService = new WcfService(null, _LoggingService);
+            try
+            {
+                _CadEntities = new CadEntities();
+                _LoggingService = new LoggingService(_CadEntities, true);
+                _BricsCadEntityInjector = new BricsCadEntityInjector(_LoggingService);
+                _WcfService = new WcfService(new Action<List<ActionWrapper>>(Process), _LoggingService);
+            }
+            catch (System.Exception)
+            {
+            }
         }
 
         public void Initialize()
@@ -52,7 +58,8 @@ namespace CsBrxMgd
                 if (RibbonServices.RibbonPaletteSet == null)
                     RibbonServices.CreateRibbonPaletteSet();
 
-                _Action<List<ActionWrapper>> jj = new Action<List<ActionWrapper>>();
+                System.Threading.Thread.CurrentThread.Name = Constants.BricscadExtensionProcessName;
+                acutPrintf("ProxyClient Initialized!!!");
             }
             catch (System.Exception ex)
             {
@@ -63,9 +70,6 @@ namespace CsBrxMgd
             {
                 _LoggingService.Write("ProxyClient Commands Initialized!!", true);
             }
-
-
-            //To-Do: Wcf initialization
         }
 
         public void Terminate()
@@ -73,12 +77,55 @@ namespace CsBrxMgd
             _LoggingService.Write("ProxyClient Commands terminated!!", true);
         }
 
-        [DllImport("Brx17.DLL", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        [CommandMethod("Test")]
+        static public void Test()
+        {
+            Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
+            try
+            {
+                List<ActionWrapper> myWrappedActions = new List<ActionWrapper>();
+                ActionWrapper myAction = new ActionWrapper();
+                myAction.Type = ActionWrapper.TypeEnum.AddCircle;
+                myWrappedActions.Add(myAction);
+                acutPrintf("Start");
+                new Commands().Process(myWrappedActions);
+                acutPrintf("End");
+            }
+            catch (System.Exception ex)
+            {
+                string Error = string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace);
+                acutPrintf(Error);
+            }
+        }
+
+        [DllImport("Brx18.DLL", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
         private extern static IntPtr acutPrintf(string str);
+
+        private void Process(List<ActionWrapper> myWrappedActions)
+        {
+            try
+            {
+                for (int i = 0; i < myWrappedActions.Count; i++)
+                {
+                    ActionWrapper myActions = myWrappedActions[i];
+
+                    if (myActions == null)
+                        throw new ArgumentNullException();
+
+                    acutPrintf(myActions.Type.ToString());
+                    myWrappedActions[i] = _BricsCadEntityInjector.Dispatcher(myActions);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                string Error = string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace);
+                acutPrintf(Error);
+                _LoggingService.WriteWithInner(ex, true, Error);
+            }
+            finally
+            {
+                _LoggingService.Write("ProxyClient Commands Initialized!!", true);
+            }
+        }
     }
 }
-
-
-
-
-

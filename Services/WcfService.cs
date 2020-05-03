@@ -12,7 +12,11 @@ public class WcfService : IDisposable
     private LoggingService _LoggingService;
     public string SuccesfullCall = "Successful tag process!";
 
-    public WcfService(LoggingService myLoggingService) : base()
+    public WcfService()
+    {
+    }
+
+    public WcfService(LoggingService myLoggingService)
     {
         _LoggingService = myLoggingService;
     }
@@ -38,19 +42,27 @@ public class WcfService : IDisposable
 
     public ActionWrapper GetClientChanel()
     {
-        string address = string.Format("net.pipe://localhost/{0}", Constants.BricscadExtensionProcessName);
-        NetNamedPipeBinding Binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
-        EndpointAddress ep = new EndpointAddress(address);
+        try
+        {
+            string address = string.Format("net.pipe://localhost/{0}", Constants.BricscadExtensionProcessName);
+            NetNamedPipeBinding Binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+            EndpointAddress ep = new EndpointAddress(address);
 
-        return ChannelFactory<ActionWrapper>.CreateChannel(Binding, ep);
+            return ChannelFactory<ActionWrapper>.CreateChannel(Binding, ep);
+        }
+        catch (Exception ex)
+        {
+            _LoggingService.WriteWithInner(ex, true, "Error at WcfService (GetClientChanel)!");
+        }
+
+        return null;
     }
 
     public List<ActionWrapper> Process(List<ActionWrapper> myActionWrapper)
     {
         try
         {
-            if (ActionDelegate != null)
-                ActionDelegate.Invoke(myActionWrapper);
+            ActionDelegate?.Invoke(myActionWrapper);            
         }
         catch (Exception ex)
         {

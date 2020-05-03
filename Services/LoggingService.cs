@@ -7,15 +7,27 @@ namespace Services
     public class LoggingService
     {
         private static LogWriter LocalLogWriter { get; set; }
-        private readonly CadEntities _dbContext;
+        private CadEntities _dbContext;
+        private bool _onlyDB;
+
+        public LoggingService(CadEntities myDbContext, bool onlydb)
+        {
+            _onlyDB = onlydb;
+            Initialize(myDbContext);
+        }
 
         public LoggingService(CadEntities myDbContext)
+        {
+            Initialize(myDbContext);
+        }
+
+        public void Initialize(CadEntities myDbContext)
         {
             try
             {
                 _dbContext = myDbContext;
 
-                if (LocalLogWriter == null)
+                if (LocalLogWriter == null && !_onlyDB)
                 {
                     LocalLogWriter = new LogWriterFactory().Create();
                     Logger.SetLogWriter(LocalLogWriter, false);
@@ -27,11 +39,12 @@ namespace Services
             }
         }
 
-        public static void Write(string text)
+        public void Write(string text)
         {
             try
             {
-                Logger.Write(text);
+                if (!_onlyDB)
+                    Logger.Write(text);
             }
             catch (Exception) { }
         }
@@ -51,10 +64,10 @@ namespace Services
             {
                 if (ex != null)
                 {
-                    Logger.Write(ex);
+                    Write(ex.Message);
                     if (ex.InnerException != null)
                     {
-                        Logger.Write(ex.InnerException);
+                        Write(ex.InnerException.Message);
                     }
                 }
             }
@@ -74,13 +87,13 @@ namespace Services
         {
             try
             {
-                Logger.Write(title);
+                Write(title);
                 if (ex != null)
                 {
-                    Logger.Write(ex);
+                    Write(ex.Message);
                     if (ex.InnerException != null)
                     {
-                        Logger.Write(ex.InnerException);
+                        Write(ex.InnerException.Message);
                     }
                 }
             }
