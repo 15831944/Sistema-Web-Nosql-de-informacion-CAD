@@ -32,22 +32,21 @@ namespace CsBrxMgd
 {
     public class Commands : IExtensionApplication
     {
-        LoggingService _LoggingService;
-        CadEntities _CadEntities;
-        BricsCadEntityInjector _BricsCadEntityInjector;
         WcfService _WcfService;
+        BricsCadEntityInjector _BricsCadEntityInjector;
 
         public Commands()
         {
             try
             {
-                _CadEntities = new CadEntities();
-                _LoggingService = new LoggingService(_CadEntities, true);
-                _BricsCadEntityInjector = new BricsCadEntityInjector(_LoggingService);
-                _WcfService = new WcfService(new Action<List<ActionWrapper>>(Process), _LoggingService);
+                _BricsCadEntityInjector = new BricsCadEntityInjector(null);
+                _WcfService = new WcfService(new Action<List<ActionWrapper>>(Process), null);
+                acutPrintf("\nCommands constructor ended");
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
+                string Error = string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace);
+                acutPrintf(Error);
             }
         }
 
@@ -59,43 +58,16 @@ namespace CsBrxMgd
                     RibbonServices.CreateRibbonPaletteSet();
 
                 System.Threading.Thread.CurrentThread.Name = Constants.BricscadExtensionProcessName;
-                acutPrintf("ProxyClient Initialized!!!");
+                acutPrintf("\nProxyClient Initialized!!!");
             }
             catch (System.Exception ex)
             {
-                _LoggingService.WriteWithInner(ex, true, string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace));
-                throw;
-            }
-            finally
-            {
-                _LoggingService.Write("ProxyClient Commands Initialized!!", true);
+                throw ex;
             }
         }
 
         public void Terminate()
         {
-            _LoggingService.Write("ProxyClient Commands terminated!!", true);
-        }
-
-        [CommandMethod("Test")]
-        static public void Test()
-        {
-            Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
-            try
-            {
-                List<ActionWrapper> myWrappedActions = new List<ActionWrapper>();
-                ActionWrapper myAction = new ActionWrapper();
-                myAction.Type = ActionWrapper.TypeEnum.AddCircle;
-                myWrappedActions.Add(myAction);
-                acutPrintf("Start");
-                new Commands().Process(myWrappedActions);
-                acutPrintf("End");
-            }
-            catch (System.Exception ex)
-            {
-                string Error = string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace);
-                acutPrintf(Error);
-            }
         }
 
         [DllImport("Brx18.DLL", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
@@ -105,6 +77,7 @@ namespace CsBrxMgd
         {
             try
             {
+                acutPrintf("Process Started!!");
                 for (int i = 0; i < myWrappedActions.Count; i++)
                 {
                     ActionWrapper myActions = myWrappedActions[i];
@@ -114,17 +87,13 @@ namespace CsBrxMgd
 
                     acutPrintf(myActions.Type.ToString());
                     myWrappedActions[i] = _BricsCadEntityInjector.Dispatcher(myActions);
+                    myWrappedActions[i].Status = ActionWrapper.StatusEnum.Ok;
                 }
             }
             catch (System.Exception ex)
             {
                 string Error = string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace);
                 acutPrintf(Error);
-                _LoggingService.WriteWithInner(ex, true, Error);
-            }
-            finally
-            {
-                _LoggingService.Write("ProxyClient Commands Initialized!!", true);
             }
         }
     }

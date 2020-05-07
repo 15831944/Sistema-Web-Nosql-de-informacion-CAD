@@ -11,12 +11,11 @@ namespace Model
     {
         public Plane()
         {
-            Attributes = new Dictionary<string, string>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Dictionary<string, string> Attributes { get; set; }
+        public byte[] FileContent { get; set; }
     }
 }

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CadEntities.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Plane.cs" />
     <Compile Include="ActionWrapper.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Script.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\PlaneViewModel.cs" />
     <Compile Include="ViewModel\ScriptListViewModel.cs" />
     <Compile Include="ViewModel\PlaneListViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />

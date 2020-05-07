@@ -14,6 +14,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
         private PreferenceRepository _PreferenceRepository;
         private PlaneRepository _PlaneRepository;
         private ScriptRepository _ScriptRepository;
+        private WcfService _WcfService;
 
         public HomeController(LoggingService myLoggingService, PreferenceRepository myPreferenceRepository, PlaneRepository myPlaneRepository,
                               ScriptRepository myScriptRepository)
@@ -26,11 +27,26 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
 
         public ActionResult Index()
         {
-            HomeViewModel vmHome = new HomeViewModel();
-            _PreferenceRepository.LoadBasePreferences(vmHome);
-            vmHome.ScriptListViewModel.List = _ScriptRepository.GetAll();
-            vmHome.PlaneListViewModel.List = _PlaneRepository.GetAll();
-            return View(vmHome);
+            try
+            {
+                _LoggingService.Write("HomeController (Index) page access", true);
+                //List<ActionWrapper> myWrappedActions = new List<ActionWrapper>();
+                //ActionWrapper myAction = new ActionWrapper();
+                //myAction.Type = ActionWrapper.TypeEnum.AddCircle;
+                //myWrappedActions.Add(myAction);
+                //var myobjects = _WcfService.GetClientChanel().Process(myWrappedActions);
+
+                HomeViewModel vmHome = new HomeViewModel();
+                _PreferenceRepository.LoadBasePreferences(vmHome);
+                vmHome.ScriptListViewModel.List = _ScriptRepository.GetAll();
+                vmHome.PlaneListViewModel.List = _PlaneRepository.GetAll();
+                return View(vmHome);
+            }
+            catch (Exception ex)
+            {
+                _LoggingService.WriteWithInner(ex, true, "HomeController(Index) error: ");
+                return new HttpNotFoundResult();
+            }
         }
     }
 }

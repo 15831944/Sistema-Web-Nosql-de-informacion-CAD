@@ -7,7 +7,13 @@ using System.ServiceModel;
 
 namespace Model
 {
-    [ServiceContract(Namespace = "SPRInteroperability")]
+    [ServiceContract(Namespace = "Model")]
+    public interface IInteroperability
+    {
+        [OperationContract]
+        List<ActionWrapper> Process(List<ActionWrapper> myWrappedActions);
+    }
+
     [Serializable()]
     public class ActionWrapper : Action
     {

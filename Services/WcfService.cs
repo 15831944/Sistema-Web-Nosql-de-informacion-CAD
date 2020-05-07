@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 
-[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-public class WcfService : IDisposable
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
+public class WcfService : IDisposable, IInteroperability
 {
     public static Action<List<ActionWrapper>> ActionDelegate { get; set; }
     public static ServiceHost serviceHost { get; set; }
     private LoggingService _LoggingService;
-    public string SuccesfullCall = "Successful tag process!";
 
     public WcfService()
     {
@@ -29,18 +28,16 @@ public class WcfService : IDisposable
             string address = string.Format("net.pipe://localhost/{0}", Constants.BricscadExtensionProcessName);
             NetNamedPipeBinding Binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
             serviceHost = new ServiceHost(typeof(WcfService));
-            serviceHost.AddServiceEndpoint(typeof(ActionWrapper), Binding, address);
+            serviceHost.AddServiceEndpoint(typeof(IInteroperability), Binding, address);
             serviceHost.Open();
         }
         catch (Exception ex)
         {
-            _LoggingService.WriteWithInner(ex, true, "Error at WcfService (New)!");
+            throw ex;
         }
-
-        _LoggingService.Write("WcfService started!", true);
     }
 
-    public ActionWrapper GetClientChanel()
+    public IInteroperability GetClientChanel()
     {
         try
         {
@@ -48,7 +45,7 @@ public class WcfService : IDisposable
             NetNamedPipeBinding Binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
             EndpointAddress ep = new EndpointAddress(address);
 
-            return ChannelFactory<ActionWrapper>.CreateChannel(Binding, ep);
+            return ChannelFactory<IInteroperability>.CreateChannel(Binding, ep);
         }
         catch (Exception ex)
         {
@@ -62,20 +59,18 @@ public class WcfService : IDisposable
     {
         try
         {
-            ActionDelegate?.Invoke(myActionWrapper);            
+            ActionDelegate?.Invoke(myActionWrapper);
         }
         catch (Exception ex)
         {
             _LoggingService.WriteWithInner(ex, true, "Error at WcfService (Process)!");
         }
 
-        _LoggingService.Write("WcfService Processed!", true);
         return myActionWrapper;
     }
 
     public void Dispose()
     {
         serviceHost?.Close();
-        ((IDisposable)serviceHost).Dispose();
     }
 }
