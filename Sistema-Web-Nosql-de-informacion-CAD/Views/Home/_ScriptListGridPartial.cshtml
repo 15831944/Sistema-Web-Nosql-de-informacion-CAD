@@ -4,12 +4,12 @@
 }
 
 <script type="text/javascript">
-    $(function(){
-        $('tbody tr').hover( function(){
-            $(this).toggleClass('hovercs');  
+    $(function () {
+        $('tbody tr').hover(function () {
+            $(this).toggleClass('hovercs');
         }).on('click', function () {
-            $('tbody tr').not($(this)).removeClass('clickable');  
-            $(this).addClass('clickable');  
+            $('tbody tr').not($(this)).removeClass('clickable');
+            $(this).addClass('clickable');
         });
     });
 </script>
@@ -26,8 +26,13 @@
                 mode: WebGridPagerModes.All,
                 columns: new[] {
                 myGrid.Column("Name"),
-                myGrid.Column("Description")
-             })
+                myGrid.Column("Description"),
+                myGrid.Column("Actions", "Actions", format: @<text><span>@item.ActionAggregate</span></text>),
+                myGrid.Column("Delete", "Delete", format: @<text><a href="/Script/Delete?Id=@item.Id">Delete</a></text>)
+})
         </div>
     </div>
 }
+<div class="RowTopMargin RowBottomMargin">
+    <input type="button" class="btn btn-info pull-right btn-lg" value="Nuevo Script" onclick="window.location.href='@Url.Action("New", "Script", null, Request.Url.Scheme).ToString()';" />
+</div>

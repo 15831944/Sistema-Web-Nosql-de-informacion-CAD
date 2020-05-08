@@ -3,18 +3,6 @@
     ViewData["Title"] = "New Plane";
 }
 
-<script>
-    //$(document).ready(function () {
-    //    $("#postedFileName").click(function () {
-    //        $("input[name=PostedFile]")[0].click();
-    //    });
-    //});
-
-    //function LogoChanged(input) {
-    //    $('#postedFileName').html(input.files[0].name);
-    //}
-</script>
-
 @using (Html.BeginForm("Save", "Plane", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

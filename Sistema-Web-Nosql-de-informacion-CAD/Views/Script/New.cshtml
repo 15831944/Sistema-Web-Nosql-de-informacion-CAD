@@ -1,0 +1,77 @@
+﻿@model ScriptViewModel
+@{
+    ViewData["Title"] = "New Script";
+}
+
+
+@using (Html.BeginForm("Save", "Script", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="page-header RowTopMargin" style="clear:both">
+        <br>
+        <h3 class="title-bluelight" style="float:left">Nuevo Script</h3>
+        <br>
+        <br>
+    </div>
+    <br />
+    <div>
+        @Html.Raw(HttpUtility.HtmlDecode(Html.ValidationSummary(false).ToHtmlString()))
+    </div>
+    <div Class="row row-eq-height RowTopMargin">
+        <div Class="col-md-6">
+            <div Class="input-group">
+                <span class="input-group-addon leftAlign" id="sizing-addon2">Nombre</span>
+                @Html.TextBoxFor(obj => obj.Current.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div Class="col-md-6">
+            <div Class="input-group">
+                <span class="input-group-addon leftAlign" id="sizing-addon1">Descripción</span>
+                @Html.TextBoxFor(obj => obj.Current.Description, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="page-header RowTopMargin">
+        <h3 class="title-bluelight">Lista de acciones</h3>
+    </div>
+    <div Class="row row-eq-height RowTopMargin">
+        <div Class="col-md-6">
+            <div Class="input-group">
+                <span Class="input-group-addon leftAlign" id="sizing-addon1">Tipo de Sector</span>
+                <div Class="form-control">
+                    @Html.DropDownListFor(obj => Model.Actions[0].Id, Model.AllActions, new { @class = "selNoBorder" })
+                </div>
+            </div>
+        </div>
+        <div Class="col-md-6">
+            <div Class="input-group">
+                <span Class="input-group-addon leftAlign" id="sizing-addon1">Tipo de Sector</span>
+                <div Class="form-control">
+                    @Html.DropDownListFor(obj => Model.Actions[1].Id, Model.AllActions, new { @class = "selNoBorder" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div Class="row row-eq-height RowTopMargin">
+        <div Class="col-md-6">
+            <div Class="input-group">
+                <span Class="input-group-addon leftAlign" id="sizing-addon1">Tipo de Sector</span>
+                <div Class="form-control">
+                    @Html.DropDownListFor(obj => Model.Actions[2].Id, Model.AllActions, new { @class = "selNoBorder" })
+                </div>
+            </div>
+        </div>
+        <div Class="col-md-6">
+            <div Class="input-group">
+                <span Class="input-group-addon leftAlign" id="sizing-addon1">Tipo de Sector</span>
+                <div Class="form-control">
+                    @Html.DropDownListFor(obj => Model.Actions[3].Id, Model.AllActions, new { @class = "selNoBorder" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="RowTopMargin RowBottomMargin">
+        <Button type="button" Class="btn btn-info pull-right btn-lg RowLeftMargin" onclick="$('form').submit();">Guardar</Button>
+    </div>
+}

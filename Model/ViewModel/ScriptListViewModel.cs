@@ -6,10 +6,10 @@ using System.Web.SessionState;
 
 public class ScriptListViewModel : ViewModelBase
 {
-    public List<Script> List { get; set; }
+    public List<ScriptWrapper> List { get; set; }
 
     public ScriptListViewModel()
     {
-        List = new List<Script>();
+        List = new List<ScriptWrapper>();
     }
 }

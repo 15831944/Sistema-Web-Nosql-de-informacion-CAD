@@ -11,15 +11,12 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
         private LoggingService _LoggingService;
         private PreferenceRepository _PreferenceRepository;
         private PlaneRepository _PlaneRepository;
-        private ScriptRepository _ScriptRepository;
 
-        public PlaneController(LoggingService myLoggingService, PreferenceRepository myPreferenceRepository, PlaneRepository myPlaneRepository,
-                              ScriptRepository myScriptRepository)
+        public PlaneController(LoggingService myLoggingService, PreferenceRepository myPreferenceRepository, PlaneRepository myPlaneRepository)
         {
             _LoggingService = myLoggingService;
             _PreferenceRepository = myPreferenceRepository;
             _PlaneRepository = myPlaneRepository;
-            _ScriptRepository = myScriptRepository;
         }
 
         public ActionResult New()
@@ -50,6 +47,21 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
             catch (Exception ex)
             {
                 _LoggingService.WriteWithInner(ex, true, "PlaneController(Save) error: ");
+                return new HttpNotFoundResult();
+            }
+        }
+
+        public ActionResult Delete(string name)
+        {
+            try
+            {
+                _LoggingService.Write("PlaneController (DeletePlane) page access", true);
+                _PlaneRepository.Delete(name);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                _LoggingService.WriteWithInner(ex, true, "PlaneController(Delete) error: ");
                 return new HttpNotFoundResult();
             }
         }

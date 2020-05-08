@@ -2,7 +2,6 @@
 using Model;
 using Services;
 using MongoDB.Driver;
-using System;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -34,13 +33,15 @@ public class PlaneRepository : BaseRepository
     public List<Plane> GetAll()
     {
         List<Plane> myPlaneList = new List<Plane>();
-        List<BsonDocument> myList = collection.Find(new BsonDocument()).ToList();
-        foreach (var item in myList)
-        {
-            myPlaneList.Add(Adapt(item));
-        }
+        foreach (var item in collection.Find(new BsonDocument()).ToList())
+            myPlaneList.Add(Adapt(item, false));
 
         return myPlaneList;
+    }
+
+    public Plane GetById(string myName)
+    {
+        return Adapt(collection.Find(Builders<BsonDocument>.Filter.Eq("Name", myName)).First(), true);
     }
 
     public void Save(Plane myPlane)
@@ -54,14 +55,26 @@ public class PlaneRepository : BaseRepository
         collection.InsertOne(doc);
     }
 
-    public Plane Adapt(BsonDocument myBsonDocument)
+    public void Delete(string myName)
     {
-        return new Plane()
+        var deleteFilter = Builders<BsonDocument>.Filter.Eq("Name", myName);
+        collection.DeleteOne(deleteFilter);
+    }
+
+    public Plane Adapt(BsonDocument myBsonDocument, bool WithFileContent)
+    {
+        Plane myPlane = new Plane()
         {
             Name = (string)myBsonDocument["Name"],
             Description = (string)myBsonDocument["Description"],
-            FileContent = (byte[])myBsonDocument["FileContent"]
         };
+
+        if (WithFileContent)
+        {
+            myPlane.FileContent = (byte[])myBsonDocument["FileContent"];
+        }
+
+        return myPlane;
     }
 
     public bool Validate(ref ModelStateDictionary state, PlaneViewModel myViewModel)

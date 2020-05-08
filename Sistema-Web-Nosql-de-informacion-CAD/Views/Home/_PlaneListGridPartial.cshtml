@@ -15,8 +15,9 @@
                  mode: WebGridPagerModes.All,
                  columns: new[] {
                 myGrid.Column("Name"),
-                myGrid.Column("Description")
-             })
+                myGrid.Column("Description"),
+                myGrid.Column("Delete", "Delete", format: @<text><a href="/Plane/Delete?name=@item.Name">Delete</a></text>)
+})
         </div>
     </div>
 }
