@@ -73,6 +73,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Execution.cs">
+      <DependentUpon>CAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExecutionPlane.cs">
+      <DependentUpon>CAD.tt</DependentUpon>
+    </Compile>
     <Compile Include="ScriptWrapper.cs" />
     <Compile Include="CadEntities.cs" />
     <Compile Include="Constants.cs" />
@@ -106,6 +112,7 @@
     <Compile Include="Script.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ExecutionViewModel.cs" />
     <Compile Include="ViewModel\ScriptViewModel.cs" />
     <Compile Include="ViewModel\PlaneViewModel.cs" />
     <Compile Include="ViewModel\ScriptListViewModel.cs" />

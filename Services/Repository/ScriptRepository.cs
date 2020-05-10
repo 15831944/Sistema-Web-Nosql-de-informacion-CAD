@@ -26,8 +26,8 @@ public class ScriptRepository : BaseRepository
         foreach (Script item in _dataContext.Script.ToList())
         {
             if (item?.Action.Count > 0)
-                myAggregate = string.Join(",", item.Action.Select(act => act.Name).ToArray());
-            myReturnList.Add(new ScriptWrapper() { Name = item.Name, Description = item.Description, ActionAggregate = myAggregate });
+                myAggregate = string.Join(", ", item.Action.Select(act => act.Name).ToArray());
+            myReturnList.Add(new ScriptWrapper() { Id = item.Id, Name = item.Name, Description = item.Description, ActionAggregate = myAggregate });
         }
 
         return myReturnList;
@@ -38,17 +38,18 @@ public class ScriptRepository : BaseRepository
         return _dataContext.Script.First(item => item.Id == id);
     }
 
-    public void Save(Script script)
+    public void Save(Script script, List<Action> actions)
     {
         if (script.Id == 0)
             _dataContext.Script.Add(script);
 
-        if (script.Action.Count() > 0)
+        if (actions?.Count > 0)
         {
-            script.Action.ToList()[0] = _ActionRepository.GetById(script.Action.ToList()[0].Id);
-            script.Action.ToList()[1] = _ActionRepository.GetById(script.Action.ToList()[0].Id);
-            script.Action.ToList()[2] = _ActionRepository.GetById(script.Action.ToList()[0].Id);
-            script.Action.ToList()[3] = _ActionRepository.GetById(script.Action.ToList()[0].Id);
+            foreach (Action item in actions)
+            {
+                if (item.Id > Constants.EmptyValue)
+                    script.Action.Add(_dataContext.Action.First(act => act.Id == item.Id));
+            }
         }
 
         _dataContext.SaveChanges();
@@ -56,7 +57,10 @@ public class ScriptRepository : BaseRepository
 
     public void Delete(int id)
     {
-        _dataContext.Script.Remove(GetById(id));
+        Script myScript = GetById(id);
+        foreach (Action item in myScript.Action.ToList())
+            myScript.Action.Remove(item);
+        _dataContext.Script.Remove(myScript);
         _dataContext.SaveChanges();
     }
 

@@ -12,20 +12,21 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Action
+    public partial class Execution
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Action()
+        public Execution()
         {
-            this.Script = new HashSet<Script>();
+            this.ExecutionPlane = new HashSet<ExecutionPlane>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public bool IsDisplayable { get; set; }
+        public System.DateTime Date { get; set; }
+        public int IdScript { get; set; }
+        public bool Active { get; set; }
     
+        public virtual Script Script { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Script> Script { get; set; }
+        public virtual ICollection<ExecutionPlane> ExecutionPlane { get; set; }
     }
 }

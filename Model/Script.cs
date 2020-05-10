@@ -18,6 +18,7 @@ namespace Model
         public Script()
         {
             this.Action = new HashSet<Action>();
+            this.Execution = new HashSet<Execution>();
         }
     
         public int Id { get; set; }
@@ -26,5 +27,7 @@ namespace Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Action> Action { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Execution> Execution { get; set; }
     }
 }

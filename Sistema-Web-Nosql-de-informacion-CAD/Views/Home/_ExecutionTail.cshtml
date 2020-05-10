@@ -1,0 +1,41 @@
+﻿@model  ExecutionViewModel
+@{
+    WebGrid myGrid = new WebGrid(Model.List);
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('tbody tr').hover(function () {
+            $(this).toggleClass('hovercs');
+        }).on('click', function () {
+            $('tbody tr').not($(this)).removeClass('clickable');
+            $(this).addClass('clickable');
+        });
+    });
+</script>
+
+<div class="page-header RowTopMargin">
+    <h3 class="title-bluelight">Cola de ejecución</h3>
+</div>
+@if (Model.List.Count > 0)
+{
+    <div Class="row row-eq-height RowTopMargin">
+        <div Class="col-md-12">
+            @myGrid.GetHtml(
+                tableStyle: "webGridTable",
+                mode: WebGridPagerModes.All,
+                columns: new[] {
+                myGrid.Column("Name"),
+                myGrid.Column("Description"),
+                myGrid.Column("Delete", "Delete", format: @<text><a href="/Execution/Delete?Id=@item.Id">Delete</a></text>)})
+        </div>
+    </div>
+}
+<div Class="row row-eq-height RowTopMargin">
+    <div Class="col-md-6">
+        <div Class="input-group">
+            <span class="input-group-addon leftAlign" id="sizing-addon2">Estado</span>
+            @Html.TextBoxFor(obj => obj.Current.Name, new { @class = "form-control" })
+        </div>
+    </div>
+</div>

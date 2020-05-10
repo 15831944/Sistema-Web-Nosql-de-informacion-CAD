@@ -19,9 +19,9 @@ public class ActionRepository : BaseRepository
 
     #region Public Methods   
 
-    public List<SelectListItem> GetAll()
+    public List<SelectListItem> GetAll(bool displayable)
     {
-        List<SelectListItem> lstActions = _dataContext.Action.ToList().Select(obj => new SelectListItem() { Value = obj.Id.ToString(), Text = obj.Name }).ToList();
+        List<SelectListItem> lstActions = _dataContext.Action.Where(item => item.IsDisplayable == displayable).Select(obj => new SelectListItem() { Value = obj.Id.ToString(), Text = obj.Name }).ToList();
         AddEmptySelectListItem(ref lstActions);
         return lstActions;
     }

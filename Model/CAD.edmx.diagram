@@ -9,7 +9,11 @@
         <EntityTypeShape EntityType="CadModel.Audit" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CadModel.Script" Width="1.5" PointX="5.125" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="CadModel.ActionScript" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CadModel.Preference" Width="1.5" PointX="7.25" PointY="0.75" />
+        <EntityTypeShape EntityType="CadModel.Preference" Width="1.5" PointX="0.625" PointY="3" />
+        <EntityTypeShape EntityType="CadModel.Execution" Width="1.5" PointX="5.125" PointY="3.125" />
+        <EntityTypeShape EntityType="CadModel.ExecutionPlane" Width="1.5" PointX="7.25" PointY="3.125" />
+        <AssociationConnector Association="CadModel.FK_Execution_Script" />
+        <AssociationConnector Association="CadModel.FK_ExecutionPlane_Execution" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

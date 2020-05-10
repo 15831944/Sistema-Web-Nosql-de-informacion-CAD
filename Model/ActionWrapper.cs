@@ -24,6 +24,7 @@ namespace Model
             AddLayer,
             AddCircle,
             ReadDwgFile,
+            SaveDwgFile,
             CreateTable,
             PerfomranceTest
         }

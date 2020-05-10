@@ -47,6 +47,9 @@ namespace Sistema_Web_Nosql_de_informacion_CAD
             builder.RegisterType<ActionRepository>()
                 .As<ActionRepository>()
                 .InstancePerRequest();
+            builder.RegisterType<ExecutionRepository>()
+                .As<ExecutionRepository>()
+                .InstancePerRequest();
 
             builder.RegisterFilterProvider();
             var container = builder.Build();

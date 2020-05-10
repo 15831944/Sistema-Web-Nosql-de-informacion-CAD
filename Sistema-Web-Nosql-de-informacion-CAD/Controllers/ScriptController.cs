@@ -23,7 +23,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
         public ActionResult New()
         {
             ScriptViewModel vmPlane = new ScriptViewModel();
-            vmPlane.AllActions = _ActionRepository.GetAll();
+            vmPlane.AllActions = _ActionRepository.GetAll(true);
             _PreferenceRepository.LoadBasePreferences(vmPlane);
             return View(vmPlane);
         }
@@ -38,13 +38,12 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
                 var myModelState = ModelState;
                 if (_ScriptRepository.Validate(ref myModelState, myModel))
                 {
-                    myModel.Current.Action = myModel.Actions;
-                    _ScriptRepository.Save(myModel.Current);
+                    _ScriptRepository.Save(myModel.Current, myModel.Actions);
                     _LoggingService.Write("ScriptController - Save () successful: ", true);
                     return RedirectToAction("Index", "Home");
                 }
 
-                myModel.AllActions = _ActionRepository.GetAll();
+                myModel.AllActions = _ActionRepository.GetAll(true);
                 return View("New", myModel);
             }
             catch (Exception ex)

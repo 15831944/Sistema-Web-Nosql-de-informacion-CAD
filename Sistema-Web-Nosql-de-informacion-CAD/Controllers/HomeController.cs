@@ -40,6 +40,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
                 _PreferenceRepository.LoadBasePreferences(vmHome);
                 vmHome.ScriptListViewModel.List = _ScriptRepository.GetAll();
                 vmHome.PlaneListViewModel.List = _PlaneRepository.GetAll();
+                vmHome.PlaneListViewModel.List = _PlaneRepository.GetAll();
                 return View(vmHome);
             }
             catch (Exception ex)

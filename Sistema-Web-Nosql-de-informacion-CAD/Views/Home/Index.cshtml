@@ -5,4 +5,5 @@
 
     @Html.Partial("~/Views/Home/_PlaneListGridPartial.cshtml", Model.PlaneListViewModel, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = Constants.PlanesGridName } });
     @Html.Partial("~/Views/Home/_ScriptListGridPartial.cshtml", Model.ScriptListViewModel, new ViewDataDictionary() { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = Constants.ScriptsGridName } });
+    @Html.Partial("~/Views/Home/_ExecutionTail.cshtml", Model.ExecutionViewModel);
 }

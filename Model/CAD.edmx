@@ -12,6 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsDisplayable" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ActionScript">
           <Key>
@@ -28,6 +29,24 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Text" Type="nvarchar" MaxLength="2000" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Execution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IdScript" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExecutionPlane">
+          <Key>
+            <PropertyRef Name="IdExecution" />
+            <PropertyRef Name="IdPlane" />
+          </Key>
+          <Property Name="IdExecution" Type="int" Nullable="false" />
+          <Property Name="IdPlane" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Preference">
           <Key>
@@ -69,10 +88,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Execution_Script">
+          <End Role="Script" Type="Self.Script" Multiplicity="1" />
+          <End Role="Execution" Type="Self.Execution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Script">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Execution">
+              <PropertyRef Name="IdScript" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExecutionPlane_Execution">
+          <End Role="Execution" Type="Self.Execution" Multiplicity="1" />
+          <End Role="ExecutionPlane" Type="Self.ExecutionPlane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Execution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExecutionPlane">
+              <PropertyRef Name="IdExecution" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CadModelStoreContainer">
           <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActionScript" EntityType="Self.ActionScript" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Execution" EntityType="Self.Execution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExecutionPlane" EntityType="Self.ExecutionPlane" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Preference" EntityType="Self.Preference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Script" EntityType="Self.Script" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ActionScript_Action" Association="Self.FK_ActionScript_Action">
@@ -82,6 +127,14 @@
           <AssociationSet Name="FK_ActionScript_Script" Association="Self.FK_ActionScript_Script">
             <End Role="Script" EntitySet="Script" />
             <End Role="ActionScript" EntitySet="ActionScript" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Execution_Script" Association="Self.FK_Execution_Script">
+            <End Role="Script" EntitySet="Script" />
+            <End Role="Execution" EntitySet="Execution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExecutionPlane_Execution" Association="Self.FK_ExecutionPlane_Execution">
+            <End Role="Execution" EntitySet="Execution" />
+            <End Role="ExecutionPlane" EntitySet="ExecutionPlane" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -96,6 +149,7 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Script" Relationship="Self.ActionScript" FromRole="Action" ToRole="Script" />
+          <Property Name="IsDisplayable" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Audit">
           <Key>
@@ -113,6 +167,7 @@
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Action" Relationship="Self.ActionScript" FromRole="Script" ToRole="Action" />
+          <NavigationProperty Name="Execution" Relationship="CadModel.FK_Execution_Script" FromRole="Script" ToRole="Execution" />
         </EntityType>
         <Association Name="ActionScript">
           <End Role="Action" Type="Self.Action" Multiplicity="*" />
@@ -127,6 +182,16 @@
             <End Role="Script" EntitySet="Script" />
           </AssociationSet>
           <EntitySet Name="Preference" EntityType="CadModel.Preference" />
+          <EntitySet Name="Execution" EntityType="CadModel.Execution" />
+          <EntitySet Name="ExecutionPlane" EntityType="CadModel.ExecutionPlane" />
+          <AssociationSet Name="FK_Execution_Script" Association="CadModel.FK_Execution_Script">
+            <End Role="Script" EntitySet="Script" />
+            <End Role="Execution" EntitySet="Execution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExecutionPlane_Execution" Association="CadModel.FK_ExecutionPlane_Execution">
+            <End Role="Execution" EntitySet="Execution" />
+            <End Role="ExecutionPlane" EntitySet="ExecutionPlane" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Preference">
           <Key>
@@ -136,6 +201,51 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Execution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdScript" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Script" Relationship="CadModel.FK_Execution_Script" FromRole="Execution" ToRole="Script" />
+          <NavigationProperty Name="ExecutionPlane" Relationship="CadModel.FK_ExecutionPlane_Execution" FromRole="Execution" ToRole="ExecutionPlane" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExecutionPlane">
+          <Key>
+            <PropertyRef Name="IdExecution" />
+            <PropertyRef Name="IdPlane" />
+          </Key>
+          <Property Name="IdExecution" Type="Int32" Nullable="false" />
+          <Property Name="IdPlane" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Execution" Relationship="CadModel.FK_ExecutionPlane_Execution" FromRole="ExecutionPlane" ToRole="Execution" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Execution_Script">
+          <End Type="CadModel.Script" Role="Script" Multiplicity="1" />
+          <End Type="CadModel.Execution" Role="Execution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Script">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Execution">
+              <PropertyRef Name="IdScript" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExecutionPlane_Execution">
+          <End Type="CadModel.Execution" Role="Execution" Multiplicity="1" />
+          <End Type="CadModel.ExecutionPlane" Role="ExecutionPlane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Execution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExecutionPlane">
+              <PropertyRef Name="IdExecution" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -145,6 +255,7 @@
           <EntitySetMapping Name="Action">
             <EntityTypeMapping TypeName="CadModel.Action">
               <MappingFragment StoreEntitySet="Action">
+                <ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -186,7 +297,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Execution">
+            <EntityTypeMapping TypeName="CadModel.Execution">
+              <MappingFragment StoreEntitySet="Execution">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IdScript" ColumnName="IdScript" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExecutionPlane">
+            <EntityTypeMapping TypeName="CadModel.ExecutionPlane">
+              <MappingFragment StoreEntitySet="ExecutionPlane">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IdPlane" ColumnName="IdPlane" />
+                <ScalarProperty Name="IdExecution" ColumnName="IdExecution" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

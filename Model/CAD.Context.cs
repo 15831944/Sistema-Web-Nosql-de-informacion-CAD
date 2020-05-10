@@ -29,5 +29,7 @@ namespace Model
         public virtual DbSet<Audit> Audit { get; set; }
         public virtual DbSet<Script> Script { get; set; }
         public virtual DbSet<Preference> Preference { get; set; }
+        public virtual DbSet<Execution> Execution { get; set; }
+        public virtual DbSet<ExecutionPlane> ExecutionPlane { get; set; }
     }
 }
