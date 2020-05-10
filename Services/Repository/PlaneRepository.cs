@@ -39,20 +39,40 @@ public class PlaneRepository : BaseRepository
         return myPlaneList;
     }
 
-    public Plane GetById(string myName)
+    public List<Plane> GetPlaneList(List<ExecutionPlane> myExecutionPlaneList)
     {
-        return Adapt(collection.Find(Builders<BsonDocument>.Filter.Eq("Name", myName)).First(), true);
+        List<Plane> myList = new List<Plane>();
+        foreach (ExecutionPlane item in myExecutionPlaneList)
+        {
+            myList.Add(Adapt(collection.Find(Builders<BsonDocument>.Filter.Eq("Id", item.IdPlane)).First(), false));
+        }
+
+        return myList;
+    }
+
+    public Plane GetById(string myId)
+    {
+        return Adapt(collection.Find(Builders<BsonDocument>.Filter.Eq("Id", myId)).First(), true);
     }
 
     public void Save(Plane myPlane)
     {
         var doc = new BsonDocument
             {
+                {"Id", myPlane.Id},
                 {"Name", myPlane.Name},
                 {"Description", myPlane.Description},
                 {"FileContent", myPlane.FileContent}
             };
+
         collection.InsertOne(doc);
+    }
+
+    public void Update(string id, byte[] fileContent)
+    {
+        var filter = Builders<BsonDocument>.Filter.Eq("FileContent", id);
+        var update = Builders<BsonDocument>.Update.Set("FileContent", fileContent);
+        collection.UpdateOne(filter, update);
     }
 
     public void Delete(string myName)
@@ -65,6 +85,7 @@ public class PlaneRepository : BaseRepository
     {
         Plane myPlane = new Plane()
         {
+            Id = (string)myBsonDocument["Id"],
             Name = (string)myBsonDocument["Name"],
             Description = (string)myBsonDocument["Description"],
         };

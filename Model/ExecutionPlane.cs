@@ -15,7 +15,7 @@ namespace Model
     public partial class ExecutionPlane
     {
         public int IdExecution { get; set; }
-        public int IdPlane { get; set; }
+        public string IdPlane { get; set; }
         public bool Active { get; set; }
     
         public virtual Execution Execution { get; set; }

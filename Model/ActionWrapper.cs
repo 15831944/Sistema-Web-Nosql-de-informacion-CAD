@@ -15,7 +15,7 @@ namespace Model
     }
 
     [Serializable()]
-    public class ActionWrapper : Action
+    public class ActionWrapper 
     {
         public enum TypeEnum
         {
@@ -42,8 +42,10 @@ namespace Model
         public StatusEnum Status { get; set; }
         public string Error { get; set; }
         public string Parameter { get; set; }
+        public string FileName { get; set; }
+        public string Name { get; set; }
 
-        public ActionWrapper() : base()
+        public ActionWrapper() 
         {
         }
     }

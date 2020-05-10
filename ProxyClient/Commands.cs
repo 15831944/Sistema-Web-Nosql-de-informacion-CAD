@@ -39,7 +39,7 @@ namespace CsBrxMgd
         {
             try
             {
-                _BricsCadEntityInjector = new BricsCadEntityInjector(null);
+                _BricsCadEntityInjector = new BricsCadEntityInjector(null, new FileService(null));
                 _WcfService = new WcfService(new Action<List<ActionWrapper>>(Process), null);
                 acutPrintf("\nCommands constructor ended");
             }
@@ -78,10 +78,10 @@ namespace CsBrxMgd
             try
             {
                 acutPrintf("Process Started!!");
+
                 for (int i = 0; i < myWrappedActions.Count; i++)
                 {
                     ActionWrapper myActions = myWrappedActions[i];
-
                     if (myActions == null)
                         throw new ArgumentNullException();
 

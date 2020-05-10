@@ -24,11 +24,13 @@ namespace CsBrxMgd
     public class BricsCadEntityInjector
     {
         LoggingService _LoggingService;
+        FileService _FileService;
         ActionWrapper currentActionWrapper;
 
-        public BricsCadEntityInjector(LoggingService myLoggingService)
+        public BricsCadEntityInjector(LoggingService myLoggingService, FileService myFileService)
         {
             _LoggingService = myLoggingService;
+            _FileService = myFileService;
         }
 
         public ActionWrapper Dispatcher(ActionWrapper myActionWrapper)
@@ -56,7 +58,10 @@ namespace CsBrxMgd
                     performanceTest();
                     break;
                 case ActionWrapper.TypeEnum.ReadDwgFile:
-                    readDwgFile(myActionWrapper.Parameter);
+                    readDwgFile(_FileService.GetPath(myActionWrapper.FileName));
+                    break;
+                case ActionWrapper.TypeEnum.SaveDwgFile:
+                    saveDwgFile();
                     break;
                 default:
                     myActionWrapper.Status = ActionWrapper.StatusEnum.DataError;
@@ -211,6 +216,23 @@ namespace CsBrxMgd
                 {
                     db.ReadDwgFile(path, FileShare.Read, true, null);
                     editor.WriteMessage("\nApproxNumObjects = {0}", db.ApproxNumObjects);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                _LoggingService.WriteWithInner(ex, true, string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace));
+            }
+        }
+
+        private void saveDwgFile()
+        {
+            Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
+            try
+            {
+                using (Database db = new Database(false, true))
+                {
+                    db.Save();
+                    
                 }
             }
             catch (System.Exception ex)

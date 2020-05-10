@@ -73,10 +73,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Action.cs">
+      <DependentUpon>CAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Audit.cs">
+      <DependentUpon>CAD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Execution.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
     <Compile Include="ExecutionPlane.cs">
+      <DependentUpon>CAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Preference.cs">
+      <DependentUpon>CAD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Script.cs">
       <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
     <Compile Include="ScriptWrapper.cs" />
@@ -84,16 +96,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Plane.cs" />
     <Compile Include="ActionWrapper.cs" />
-    <Compile Include="Preference.cs">
-      <DependentUpon>CAD.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Action.cs">
-      <DependentUpon>CAD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Audit.cs">
-      <DependentUpon>CAD.tt</DependentUpon>
-    </Compile>
     <Compile Include="CAD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,9 +111,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CAD.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Script.cs">
-      <DependentUpon>CAD.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ExecutionViewModel.cs" />
     <Compile Include="ViewModel\ScriptViewModel.cs" />

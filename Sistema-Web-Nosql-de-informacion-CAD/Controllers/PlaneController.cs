@@ -37,6 +37,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
                 if (_PlaneRepository.Validate(ref myModelState, myModel))
                 {
                     myModel.Current.FileContent = ReadAll(myModel.PostedFile);
+                    myModel.Current.Id = Guid.NewGuid().ToString();
                     _PlaneRepository.Save(myModel.Current);
                     _LoggingService.Write("PlaneController - Save () successful: ", true);
                     return RedirectToAction("Index", "Home");

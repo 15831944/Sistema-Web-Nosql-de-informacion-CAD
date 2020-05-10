@@ -22,7 +22,7 @@ namespace Model
     
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public int IdScript { get; set; }
+        public Nullable<int> IdScript { get; set; }
         public bool Active { get; set; }
     
         public virtual Script Script { get; set; }

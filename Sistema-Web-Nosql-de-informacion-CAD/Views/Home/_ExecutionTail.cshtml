@@ -17,25 +17,37 @@
 <div class="page-header RowTopMargin">
     <h3 class="title-bluelight">Cola de ejecución</h3>
 </div>
-@if (Model.List.Count > 0)
+@if (Model.Current.Id > 0)
 {
+    if (Model.List.Count > 0)
+    {
+        <div Class="row row-eq-height RowTopMargin">
+            <div Class="col-md-12">
+                @myGrid.GetHtml(
+                     tableStyle: "webGridTable",
+                     mode: WebGridPagerModes.All,
+                     columns: new[] {
+                    myGrid.Column("Name"),
+                    myGrid.Column("Description"),
+                    myGrid.Column("Delete", "Delete", format: @<text><a href="/Execution/Delete?Id=@item.Id">Delete</a></text>)})
+            </div>
+        </div>
+    }
     <div Class="row row-eq-height RowTopMargin">
-        <div Class="col-md-12">
-            @myGrid.GetHtml(
-                tableStyle: "webGridTable",
-                mode: WebGridPagerModes.All,
-                columns: new[] {
-                myGrid.Column("Name"),
-                myGrid.Column("Description"),
-                myGrid.Column("Delete", "Delete", format: @<text><a href="/Execution/Delete?Id=@item.Id">Delete</a></text>)})
+        <div Class="col-md-6">
+            <div Class="input-group">
+                <span class="input-group-addon leftAlign" id="sizing-addon2">Script a utilizar</span>
+                <span class="form-control" id="sizing-addon2">@Model.ScriptName</span>
+            </div>
+        </div>
+        <div Class="col-md-6">
+            <div Class="input-group">
+                <span class="input-group-addon leftAlign" id="sizing-addon2">Estado de la ejecución</span>
+                <span class="form-control" id="sizing-addon2">@Model.Status</span>
+            </div>
         </div>
     </div>
 }
-<div Class="row row-eq-height RowTopMargin">
-    <div Class="col-md-6">
-        <div Class="input-group">
-            <span class="input-group-addon leftAlign" id="sizing-addon2">Estado</span>
-            @Html.TextBoxFor(obj => obj.Current.Name, new { @class = "form-control" })
-        </div>
-    </div>
+<div class="RowTopMargin RowBottomMargin">
+    <input type="button" class="btn btn-info pull-right btn-lg" value="Ejecutar" onclick="window.location.href='@Url.Action("Execute", "Execution", null, Request.Url.Scheme).ToString()';" />
 </div>

@@ -14,15 +14,16 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
         private PreferenceRepository _PreferenceRepository;
         private PlaneRepository _PlaneRepository;
         private ScriptRepository _ScriptRepository;
-        private WcfService _WcfService;
+        private ExecutionRepository _ExecutionRepository;
 
         public HomeController(LoggingService myLoggingService, PreferenceRepository myPreferenceRepository, PlaneRepository myPlaneRepository,
-                              ScriptRepository myScriptRepository)
+                              ScriptRepository myScriptRepository, ExecutionRepository myExecutionRepository)
         {
             _LoggingService = myLoggingService;
             _PreferenceRepository = myPreferenceRepository;
             _PlaneRepository = myPlaneRepository;
             _ScriptRepository = myScriptRepository;
+            _ExecutionRepository = myExecutionRepository;
         }
 
         public ActionResult Index()
@@ -30,17 +31,15 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
             try
             {
                 _LoggingService.Write("HomeController (Index) page access", true);
-                //List<ActionWrapper> myWrappedActions = new List<ActionWrapper>();
-                //ActionWrapper myAction = new ActionWrapper();
-                //myAction.Type = ActionWrapper.TypeEnum.AddCircle;
-                //myWrappedActions.Add(myAction);
-                //var myobjects = _WcfService.GetClientChanel().Process(myWrappedActions);
-
                 HomeViewModel vmHome = new HomeViewModel();
                 _PreferenceRepository.LoadBasePreferences(vmHome);
                 vmHome.ScriptListViewModel.List = _ScriptRepository.GetAll();
                 vmHome.PlaneListViewModel.List = _PlaneRepository.GetAll();
-                vmHome.PlaneListViewModel.List = _PlaneRepository.GetAll();
+
+                Execution currentExecution = _ExecutionRepository.GetCurrent();
+                vmHome.ExecutionViewModel.Current = currentExecution;
+                vmHome.ExecutionViewModel.List = _PlaneRepository.GetPlaneList(currentExecution.ExecutionPlane.ToList());
+
                 return View(vmHome);
             }
             catch (Exception ex)

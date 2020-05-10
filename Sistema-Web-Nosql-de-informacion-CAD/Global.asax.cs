@@ -29,6 +29,9 @@ namespace Sistema_Web_Nosql_de_informacion_CAD
             builder.RegisterType<LoggingService>()
                   .As<LoggingService>()
                   .InstancePerDependency();
+            builder.RegisterType<FileService>()
+                .As<FileService>()
+                .InstancePerDependency();
             builder.RegisterType<WcfService>()
                  .As<WcfService>()
                  .InstancePerDependency();

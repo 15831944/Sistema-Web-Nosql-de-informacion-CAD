@@ -16,11 +16,12 @@
                  columns: new[] {
                 myGrid.Column("Name"),
                 myGrid.Column("Description"),
-                myGrid.Column("Delete", "Delete", format: @<text><a href="/Plane/Delete?name=@item.Name">Delete</a></text>)
+                myGrid.Column("AddToExecution", "AddToExecution", format: @<text><a href="/Execution/Add?id=@item.Id">Add</a></text>),
+                myGrid.Column("Delete", "Delete", format: @<text><a href="/Plane/Delete?name=@item.Id">Delete</a></text>)
 })
         </div>
     </div>
 }
 <div class="RowTopMargin RowBottomMargin">
-    <input type="button" class="btn btn-info pull-right btn-lg" value="Nuevo Proyecto" onclick="window.location.href='@Url.Action("New", "Plane", null, Request.Url.Scheme).ToString()';" />
+    <input type="button" class="btn btn-info pull-right btn-lg" value="Nuevo plano" onclick="window.location.href='@Url.Action("New", "Plane", null, Request.Url.Scheme).ToString()';" />
 </div>
