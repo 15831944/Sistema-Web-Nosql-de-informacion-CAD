@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using Model;
 using Services;
@@ -84,16 +85,24 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
                 Execution myExecution = _ExecutionRepository.GetCurrent();
                 List<Model.Action> myActions = myExecution.Script.Action.ToList();
                 myChanel = _WcfService.GetClientChanel();
+                StringBuilder planeNameConcatenation = new StringBuilder();
 
                 foreach (ExecutionPlane item in myExecution.ExecutionPlane)
                 {
                     Plane current = _PlaneRepository.GetById(item.IdPlane);
+                    planeNameConcatenation.Append(current.Name + ", ");
                     _FileService.Save(current.Name, current.FileContent);
                     myChanel.Process(_ActionRepository.GetAllAsWrapper(myActions, current.Name));
                     _PlaneRepository.Update(item.IdPlane, _FileService.ReadFromFile(current.Name));
                 }
 
-                return View(new ExecutionViewModel());
+                ExecutionViewModel myModel = new ExecutionViewModel();
+                myModel.LastExecutionPlanName = string.Format("{0} - {1}", myExecution.Script.Name, myExecution.Date.ToShortDateString());
+                string myText = planeNameConcatenation.ToString();
+                myText = myText.Remove(myText.Length - 2, 2);
+                myModel.LastExecutionPlanText = string.Format("Script lanzado contra los siguientes planos: {0}", myText);
+
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {

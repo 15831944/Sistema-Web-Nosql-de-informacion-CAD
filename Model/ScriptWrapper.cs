@@ -9,7 +9,6 @@ namespace Model
 {
     public class ScriptWrapper : Script
     {
-
         public string ActionAggregate { get; set; }
 
         public ScriptWrapper() : base()

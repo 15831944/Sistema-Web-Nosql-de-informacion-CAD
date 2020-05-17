@@ -77,7 +77,8 @@ namespace CsBrxMgd
         {
             try
             {
-                acutPrintf("Process Started!!");
+                acutPrintf("Process Started!!\n");
+                acutPrintf(myWrappedActions[0].Parameter + "\n");
 
                 for (int i = 0; i < myWrappedActions.Count; i++)
                 {
@@ -85,7 +86,7 @@ namespace CsBrxMgd
                     if (myActions == null)
                         throw new ArgumentNullException();
 
-                    acutPrintf(myActions.Type.ToString());
+                    acutPrintf(myActions.Type.ToString() + "\n");
                     myWrappedActions[i] = _BricsCadEntityInjector.Dispatcher(myActions);
                     myWrappedActions[i].Status = ActionWrapper.StatusEnum.Ok;
                 }

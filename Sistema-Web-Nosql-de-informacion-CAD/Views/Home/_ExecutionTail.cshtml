@@ -51,3 +51,16 @@
 <div class="RowTopMargin RowBottomMargin">
     <input type="button" class="btn btn-info pull-right btn-lg" value="Ejecutar" onclick="window.location.href='@Url.Action("Execute", "Execution", null, Request.Url.Scheme).ToString()';" />
 </div>
+@if (Model.LastExecutionPlanName != null && !Model.LastExecutionPlanName.Equals(string.Empty))
+{
+    <div class="panel panel-success">
+        <div class="panel-heading">Resultado de ejecución de nombre: @Model.LastExecutionPlanName</div>
+        <div class="panel-body">
+            <div Class="row row-eq-height RowTopMargin">
+                <div Class="col-md-12">
+                    @Model.LastExecutionPlanText
+                </div>
+            </div>
+        </div>
+    </div>
+}

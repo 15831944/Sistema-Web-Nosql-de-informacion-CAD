@@ -59,6 +59,31 @@ public class ViewModelBase
         }
     }
 
+    private const string WebLastExecutionPlanName = "LastExecutionPlanName";
+    public string LastExecutionPlanName
+    {
+        get
+        {
+            return currentSession[WebLastExecutionPlanName]?.ToString();
+        }
+        set
+        {
+            currentSession[WebLastExecutionPlanName] = value;
+        }
+    }
+
+    private const string WebLastExecutionPlanText = "LastExecutionPlanText";
+    public string LastExecutionPlanText
+    {
+        get
+        {
+            return currentSession[WebLastExecutionPlanText]?.ToString();
+        }
+        set
+        {
+            currentSession[WebLastExecutionPlanText] = value;
+        }
+    }
     public bool IsCallback { get; set; }
 
     #endregion

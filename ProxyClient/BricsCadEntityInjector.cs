@@ -26,11 +26,13 @@ namespace CsBrxMgd
         LoggingService _LoggingService;
         FileService _FileService;
         ActionWrapper currentActionWrapper;
+        Database database;
 
         public BricsCadEntityInjector(LoggingService myLoggingService, FileService myFileService)
         {
             _LoggingService = myLoggingService;
             _FileService = myFileService;
+            database = new Database(false, true);
         }
 
         public ActionWrapper Dispatcher(ActionWrapper myActionWrapper)
@@ -61,7 +63,7 @@ namespace CsBrxMgd
                     readDwgFile(_FileService.GetPath(myActionWrapper.FileName));
                     break;
                 case ActionWrapper.TypeEnum.SaveDwgFile:
-                    saveDwgFile();
+                    saveDwgFile(_FileService.GetPath(myActionWrapper.FileName));
                     break;
                 default:
                     myActionWrapper.Status = ActionWrapper.StatusEnum.DataError;
@@ -123,7 +125,6 @@ namespace CsBrxMgd
                 myLayer.Name = "CoolLayer";
                 myLayer.Color = Teigha.Colors.Color.FromRgb(255, 0, 255);
 
-                Database database = HostApplicationServices.WorkingDatabase;
                 _AcDb.TransactionManager manager = database.TransactionManager;
 
                 using (Transaction action = manager.StartTransaction())
@@ -149,7 +150,6 @@ namespace CsBrxMgd
 
         private void addCircle()
         {
-            Editor editor = _AcAp.Application.DocumentManager.MdiActiveDocument.Editor;
             try
             {
                 Circle circle = new Circle(new Point3d(0, 0, 0), Vector3d.ZAxis, 3);
@@ -170,7 +170,6 @@ namespace CsBrxMgd
             Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
             {
-                Database database = HostApplicationServices.WorkingDatabase;
                 if (database == null)
                     throw new NullReferenceException("database is null");
 
@@ -209,35 +208,28 @@ namespace CsBrxMgd
 
         private void readDwgFile(string path)
         {
-            Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
             {
-                using (Database db = new Database(false, true))
-                {
-                    db.ReadDwgFile(path, FileShare.Read, true, null);
-                    editor.WriteMessage("\nApproxNumObjects = {0}", db.ApproxNumObjects);
-                }
+                database.ReadDwgFile(path, FileShare.ReadWrite, true, null);
             }
             catch (System.Exception ex)
             {
                 _LoggingService.WriteWithInner(ex, true, string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace));
+                throw ex;
             }
         }
 
-        private void saveDwgFile()
+        private void saveDwgFile(string path)
         {
-            Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
             {
-                using (Database db = new Database(false, true))
-                {
-                    db.Save();
-                    
-                }
+                database.Save();
+                database.CloseInput(true);
             }
             catch (System.Exception ex)
             {
                 _LoggingService.WriteWithInner(ex, true, string.Format("\nError: {0}\nStackTrace: {1}", ex.Message, ex.StackTrace));
+                throw ex;
             }
         }
 
@@ -246,8 +238,6 @@ namespace CsBrxMgd
             Editor editor = Application.DocumentManager.MdiActiveDocument.Editor;
             try
             {
-                Database database = HostApplicationServices.WorkingDatabase;
-
                 Table table = new Table();
                 table.SetDatabaseDefaults(database);
 
@@ -278,7 +268,6 @@ namespace CsBrxMgd
         private ObjectIdCollection AddToModelSpace(params Entity[] list)
         {
             ObjectIdCollection ids = new ObjectIdCollection();
-            Database database = HostApplicationServices.WorkingDatabase;
             _AcDb.TransactionManager manager = database.TransactionManager;
             using (Transaction action = manager.StartTransaction())
             {

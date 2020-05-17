@@ -13,6 +13,21 @@ public class ExecutionViewModel : ViewModelBase
         }
     }
 
+    public string LastExecutionName
+    {
+        get
+        {
+            return LastExecutionPlanName;
+        }
+    }
+
+    public string LastExecutionText
+    {
+        get
+        {
+            return LastExecutionPlanText;
+        }
+    }
     public string ScriptName
     {
         get
