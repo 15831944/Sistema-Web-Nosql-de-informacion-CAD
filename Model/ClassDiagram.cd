@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Model.ActionWrapper" Collapsed="true">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAQAAAAAAAAQAAAAQAAAAAQAAAABAAAA=</HashCode>
+      <FileName>ActionWrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.CadEntities" Collapsed="true">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAQAAAAAIAEAAAAAAAAAAIAAAgAAQ=</HashCode>
+      <FileName>CAD.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Action" Collapsed="true">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAQAAAAAACAAAAAAAAAgAAA=</HashCode>
+      <FileName>Action.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Audit" Collapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAACAAAAAA=</HashCode>
+      <FileName>Audit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Execution" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAAAAAAAAQAAAAAAAAAAAAAAhAAAAAAAgAAA=</HashCode>
+      <FileName>Execution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ExecutionPlane" Collapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAIAAAAAAA=</HashCode>
+      <FileName>ExecutionPlane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Preference" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Preference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Script" Collapsed="true">
+    <Position X="2" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAQ=</HashCode>
+      <FileName>Script.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Constants" Collapsed="true">
+    <Position X="6" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAACQAAAAgAAAAEAAgGAAAAAAABAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.Plane" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAIAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Plane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model.ScriptWrapper" Collapsed="true">
+    <Position X="2" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ScriptWrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExecutionViewModel" Collapsed="true">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAEAgCAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ViewModel\ExecutionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomeViewModel" Collapsed="true">
+    <Position X="11" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAIAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\HomeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaneListViewModel" Collapsed="true">
+    <Position X="13.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ViewModel\PlaneListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaneViewModel" Collapsed="true">
+    <Position X="2" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\PlaneViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptListViewModel" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ViewModel\ScriptListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptViewModel" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAACAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\ScriptViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModelBase" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgABAAAAAAAAAAAAAAACIAAAQKACgAAgAAAAAABAAQ=</HashCode>
+      <FileName>ViewModel\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Model.IInteroperability" Collapsed="true">
+    <Position X="9.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ActionWrapper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

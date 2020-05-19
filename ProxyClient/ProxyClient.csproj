@@ -56,9 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="BricscadApp">
       <Guid>{6B49E190-4341-4F35-9D14-95E1EB504263}</Guid>
       <VersionMajor>18</VersionMajor>
@@ -96,6 +93,9 @@
       <Project>{28709C7C-288F-49AC-845F-370A089F082C}</Project>
       <Name>Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

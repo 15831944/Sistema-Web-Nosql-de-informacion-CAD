@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CsBrxMgd.BricsCadEntityInjector" Collapsed="true">
+    <Position X="5.25" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAiAAAAAAAAhAAAAAAQAAAASAAJAEBAAAAIAIAAA=</HashCode>
+      <FileName>BricsCadEntityInjector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CsBrxMgd.Commands" Collapsed="true">
+    <Position X="7.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAQAAAgAAAAAAAAAAAAAAAAAEAAAAgIA=</HashCode>
+      <FileName>Commands.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

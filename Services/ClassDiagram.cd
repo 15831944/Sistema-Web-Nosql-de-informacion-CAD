@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Services.FileService" Collapsed="true">
+    <Position X="3.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAQAAAAAAAAAAAAACAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>FileService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Services.LoggingService" Collapsed="true">
+    <Position X="5.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAIQAAAAAUCAAAAAAAAAAAAAQAAAEAAAA=</HashCode>
+      <FileName>LoggingService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActionRepository" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>Repository\ActionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseRepository" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACBCAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\BaseRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExecutionRepository" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAgAAAAAAAAAAACBAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\ExecutionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaneRepository" Collapsed="true">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAIAAAACAAAAAAEAAAAACAAEAAAAAAgAAIAAAAIA=</HashCode>
+      <FileName>Repository\PlaneRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PreferenceRepository" Collapsed="true">
+    <Position X="3.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAABAgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\PreferenceRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScriptRepository" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAIAAAACAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>Repository\ScriptRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WcfService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAhAAAAAAAEACAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>WcfService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

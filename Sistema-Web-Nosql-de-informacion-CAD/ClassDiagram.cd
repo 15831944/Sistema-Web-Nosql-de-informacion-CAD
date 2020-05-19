@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Sistema_Web_Nosql_de_informacion_CAD.BundleConfig" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sistema_Web_Nosql_de_informacion_CAD.FilterConfig" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sistema_Web_Nosql_de_informacion_CAD.RouteConfig" Collapsed="true">
+    <Position X="3.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sistema_Web_Nosql_de_informacion_CAD.MvcApplication" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sistema_Web_Nosql_de_informacion_CAD.Controllers.ExecutionController" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIAAAAAAACAAAwAAAAAAAAAAAEAAKEAAAACAAAAIAA=</HashCode>
+      <FileName>Controllers\ExecutionController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sistema_Web_Nosql_de_informacion_CAD.Controllers.HomeController" Collapsed="true">
+    <Position X="3.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAIEAAAECAAAAIAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sistema_Web_Nosql_de_informacion_CAD.Controllers.PlaneController" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAACAAEAAAAAAAAAEAAIAAAAACAAAAIAA=</HashCode>
+      <FileName>Controllers\PlaneController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sistema_Web_Nosql_de_informacion_CAD.Controllers.ScriptController" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAIAAAAAAACAAAAAAAAQAAAEAAIAAAAACAAAAAAA=</HashCode>
+      <FileName>Controllers\ScriptController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
