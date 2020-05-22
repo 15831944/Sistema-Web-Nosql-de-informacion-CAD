@@ -96,11 +96,11 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Controllers
                     _PlaneRepository.Update(item.IdPlane, _FileService.ReadFromFile(current.Name));
                 }
 
-                ExecutionViewModel myModel = new ExecutionViewModel();
-                myModel.LastExecutionPlanName = string.Format("{0} - {1}", myExecution.Script.Name, myExecution.Date.ToShortDateString());
-                string myText = planeNameConcatenation.ToString();
-                myText = myText.Remove(myText.Length - 2, 2);
-                myModel.LastExecutionPlanText = string.Format("Script lanzado contra los siguientes planos: {0}", myText);
+                //ExecutionViewModel myModel = new ExecutionViewModel();
+                //myModel.LastExecutionPlanName = string.Format("{0} - {1}", myExecution.Script.Name, myExecution.Date.ToShortDateString());
+                //string myText = planeNameConcatenation.ToString();
+                //myText = myText.Remove(myText.Length - 2, 2);
+                //myModel.LastExecutionPlanText = string.Format("Script lanzado contra los siguientes planos: {0}", myText);
 
                 return RedirectToAction("Index", "Home");
             }

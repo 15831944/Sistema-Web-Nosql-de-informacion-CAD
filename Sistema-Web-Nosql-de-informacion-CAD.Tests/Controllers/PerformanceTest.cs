@@ -9,6 +9,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Tests.Controllers
     [TestClass]
     public class PerformanceTest : BaseTest
     {
+        public const int NumberOfExecutions = 100;
         LoggingService _LoggingService;
         PreferenceRepository _PreferenceRepository;
         ExecutionRepository _ExecutionRepository;
@@ -32,9 +33,11 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Tests.Controllers
         [TestMethod]
         public void Execute()
         {
-            ExecutionController myController = new ExecutionController(_LoggingService, _PreferenceRepository, _ExecutionRepository, _WcfService, _ActionRepository, _FileService, _PlaneRepository);
-            myController.Execute();
+            ExecutionController myController = new ExecutionController(_LoggingService, _PreferenceRepository, _ExecutionRepository, _WcfService, _ActionRepository, _FileService, _PlaneRepository);       
+            for (int i = 0; i < NumberOfExecutions; i++)
+            {
+                myController.Execute();
+            }            
         }
-
     }
 }

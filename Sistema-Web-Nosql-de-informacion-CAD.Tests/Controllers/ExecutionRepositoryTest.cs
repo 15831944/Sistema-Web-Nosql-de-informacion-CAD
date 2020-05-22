@@ -33,6 +33,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Tests.Controllers
             myPlane.Id = "1000";
             myPlane.Name = "Prueba";
             myPlane.Description = "Prueba";
+            myPlane.FileContent = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 };
             myPlaneRepository.Save(myPlane);
 
             myExecutionRepository.AddPlane(myExecutionRepository.GetCurrent(), myPlane.Id);

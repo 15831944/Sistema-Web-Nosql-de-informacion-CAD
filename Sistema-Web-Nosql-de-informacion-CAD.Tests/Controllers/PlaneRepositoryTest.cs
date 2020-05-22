@@ -35,7 +35,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Tests.Controllers
         [TestMethod]
         public void GetById()
         {
-            Assert.IsTrue(myPlaneRepository.GetById("8") != null);
+            Assert.IsTrue(myPlaneRepository.GetById("01a9e846-fc13-4f3e-ae61-3add48f2f8c6") != null);
         }
 
         [TestMethod]
@@ -45,6 +45,7 @@ namespace Sistema_Web_Nosql_de_informacion_CAD.Tests.Controllers
             myPlane.Id = "10";
             myPlane.Name = "Prueba";
             myPlane.Description = "Prueba";
+            myPlane.FileContent = new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 };
             myPlaneRepository.Save(myPlane);
 
             Assert.IsTrue(myPlaneRepository.GetAll().Any(item => item.Name.Equals("Prueba")));
